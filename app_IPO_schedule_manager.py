@@ -15,8 +15,8 @@ refresh_token()
 
 #get_st_info(st_type = ['DJI','INDEX'])
 #get_st_info(st_type = ['INDEX','HDI', 'HKI'])
-get_st_info(st_type = ['HKI'])
-#getIpoInfo() # IPO 정보 업데이트
+#get_st_info(st_type = ['HKI'])
+getIpoInfo() # IPO 정보 업데이트
 
 
 #get_IPO_st_info(frd_name=["김익현"]) # IPO 현재가 전송

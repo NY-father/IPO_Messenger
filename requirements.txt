@@ -1,0 +1,7 @@
+schedule
+requests
+beautifulsoup4
+pandas
+tabulate
+pykrx
+yfinance

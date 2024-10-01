@@ -45,18 +45,15 @@ def getIpoInfo():
       ipo_st = ipo_sts[i].text.strip().replace("\t","")
       stinfo_raw = ipo_st.split("\n")
       stinfo_raw = list(filter(None, stinfo_raw))
+
+      # print("stinfo_raw:", stinfo_raw,"\n\n")
     
     
-       # 종목
-      stinfo_dic['종목'][i] = stinfo_raw[0].split(" ")[1]
-      
        # 시장
-      #if stinfo_raw[0].split(" ")[1][-2:] == '스팩':
-      #  stinfo_dic['시장'][i] = '스팩'
-      if stinfo_raw[0].split(" ")[1][-2:] == '리츠':
-        stinfo_dic['시장'][i] = '리츠'
-      else:
-        stinfo_dic['시장'][i] = stinfo_raw[0].split(" ")[0]
+      stinfo_dic['시장'][i] = stinfo_raw[0][0:2]
+      
+       # 종목
+      stinfo_dic['종목'][i] = stinfo_raw[0][3:]
       
        # 공모희망가, 공모가
       if '~' in stinfo_raw[stinfo_raw.index('공모가')+1]:
@@ -95,6 +92,9 @@ def getIpoInfo():
         stinfo_dic['진행상태'][i] = stinfo_raw[stinfo_raw.index('진행상태')+1]
       else:
         stinfo_dic['진행상태'][i] = '공모청약완료'
+      
+
+    print(stinfo_dic['종목'])
 
 
 
@@ -109,10 +109,6 @@ def getIpoInfo():
     
     
     stinfo_df['개인청약경쟁률'].fillna(value=np.nan, inplace=True)
-    
-  # -- 스팩, 리츠 삭제
-    stinfo_df.drop(stinfo_df.loc[stinfo_df['시장']=='스팩'].index, inplace=True)
-    stinfo_df.drop(stinfo_df.loc[stinfo_df['시장']=='리츠'].index, inplace=True)
     
 
 
@@ -190,6 +186,6 @@ if __name__ == "__main__":
     from kakao_message import *
     #refresh_token()
     getIpoInfo()
-    showIPO_DB()
+    
     
 
